@@ -58,18 +58,18 @@ MIDDLEWARE_CLASSES = [
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(str(ROOT_DIR), 'db.sqlite3'),
-    }
-}
-
-# what it should be 
+# if you want to use sqlite 
 # DATABASES = {
-	#'default': env.db('DATABASE_URL'),
-#}
-# DATABASES['default']['ATOMIC_REQUESTS'] = True
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(str(ROOT_DIR), 'db.sqlite3'),
+#    }
+# }
+
+DATABASES = {
+        'default': env.db('DATABASE_URL'), # example 'postgres:///db_name'
+}
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # templates config
 TEMPLATES = [
