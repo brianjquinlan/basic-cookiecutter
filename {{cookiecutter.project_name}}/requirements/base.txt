@@ -1,6 +1,6 @@
 wheel
-django
-psycopg2
-django-redis
-redis
-django-environ
+Django==1.11
+psycopg2==2.7.1
+django-redis==4.8.0
+redis==2.10.5
+django-environ==0.4.3

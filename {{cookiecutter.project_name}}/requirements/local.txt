@@ -1,4 +1,4 @@
 -r base.txt
 
-Sphinx
-django-debug-toolbar
+Sphinx==1.5.5
+django-debug-toolbar==1.7

@@ -34,11 +34,10 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
 ]
 
 LOCAL_APPS = [
-
+    # apps you create go here
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS 
