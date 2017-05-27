@@ -1,4 +1,3 @@
-
 from .base import * # noqa?
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -21,7 +20,7 @@ CACHES = {
             'django.core.cache.backends.locmem.LocMemCache',
             # maybe use 'django.core.cache.backends.dummy.DummyCache'
         'LOCATION': 'unique'
-
+    }
 }
 
 

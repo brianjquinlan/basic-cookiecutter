@@ -140,6 +140,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    str(APPS_DIR.path('static')
+]
+
+# media
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(APPS_DIR('media'))
+
 # url config
 ROOT_URLCONF = 'config.urls'
 
