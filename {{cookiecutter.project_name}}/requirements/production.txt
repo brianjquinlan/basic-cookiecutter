@@ -2,3 +2,7 @@
 
 # Email setup
 django-anymail==0.9
+
+# memcache as cache backend
+python3-memcached==1.58 
+django-memcache-status==1.3
