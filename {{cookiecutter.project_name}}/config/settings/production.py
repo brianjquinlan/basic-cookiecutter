@@ -19,16 +19,17 @@ ANYMAIL = {
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL')
 
+# caching with memcache
 INSTALLED_APPS += ['memcache_status']
-
 
 # need to add to specific spots
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
-	'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware', # memcache
     'django.middleware.common.CommonMiddleware',
-	'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware', # memcache
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -36,7 +37,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# caching with memcache
 CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -47,3 +47,27 @@ CACHES = {
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 15 # 15 minutes
 CACHE_MIDDLEWARE_KEY_PREFIX = '{{ cookiecutter.project_name }}' 
+
+# todo list -------------------------------------------------------
+# database config
+DATABASES['default'] = env.db('DATABASE_URL')
+
+# template config
+# add cache loader to templates
+TEMPLATES[0]['OPTIONS']['loaders'] = [('django.template.loaders.cached.Loader', [
+        'django.template.loaders.filesystem.Loader', 'django.template.loaders.app_directories.Loader',
+    ]),
+]
+
+# security settings
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# static settings using whitenoise
+STATIC_ROOT = str(APPS_DIRS.path('staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# media settings
+
+# logging 
