@@ -1,4 +1,4 @@
-from .base import * # noqa?
+from .base import *
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='CHANGE')
@@ -23,11 +23,14 @@ CACHES = {
     }
 }
 
+# database session backend
+INSTALLED_APPS += ['django.contrib.sessions']
 
 # django-debug-toolbar
 MIDDLEWARE_CLASSES += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
 INSTALLED_APPS += ['debug_toolbar', ]
 
-# INTERNAL_IPS ? 
+INTERNAL_IPS = '127.0.0.1'
 
-# django-extensions?
+# django-extensions
+INSTALLED_APPS += ['django_extensions']

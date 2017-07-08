@@ -2,5 +2,7 @@
 	"project_name": "project_name",
     "author": "your name",
     "email": "your email",
-    "description": "short description of project"
+    "description": "short description of project",
+    "mailchimp": "no",
+    "redis": "yes"
 }

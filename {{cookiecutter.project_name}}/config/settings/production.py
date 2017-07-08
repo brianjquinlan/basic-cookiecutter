@@ -1,5 +1,4 @@
 from .common import *
-# obviously not done
 
 # Secret key
 SECRET_KEY = env('DJANGO_SECRET_KEY')
@@ -18,6 +17,26 @@ ANYMAIL = {
 
 EMAIL_BACKEND = 'anymail.backends.mailgun.EmailBackend'
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL')
+
+# sessions in cache
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+
+{% if cookiecutter.redis == 'yes' %}
+
+# caching with redis
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'IGNORE_EXCEPTIONS': True,
+        }
+    }
+}
+
+{% else %}
 
 # caching with memcache
 INSTALLED_APPS += ['memcache_status']
@@ -44,11 +63,12 @@ CACHES = {
         }
 }
 
+{% endif %}
+
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 60 * 15 # 15 minutes
 CACHE_MIDDLEWARE_KEY_PREFIX = '{{ cookiecutter.project_name }}' 
 
-# todo list -------------------------------------------------------
 # database config
 DATABASES['default'] = env.db('DATABASE_URL')
 

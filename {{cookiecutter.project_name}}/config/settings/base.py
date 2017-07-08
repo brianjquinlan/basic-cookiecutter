@@ -28,7 +28,6 @@ DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
@@ -58,14 +57,6 @@ MIDDLEWARE_CLASSES = [
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-# if you want to use sqlite 
-# DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(str(ROOT_DIR), 'db.sqlite3'),
-#    }
-# }
-
 DATABASES = {
         'default': env.db('DATABASE_URL'), # example 'postgres:///db_name'
 }
@@ -115,6 +106,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # what's used to send emails
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND')
+
+{% if cookiecutter.mailchimp == 'yes' %}
+# mailchimp keys
+MAILCHIMP_API_KEY = env('MAILCHIMP_API_KEY')
+MAILCHIMP_SUBSCRIBE_LIST_ID = env('MAILCHIMP_SUBSCRIBE_LIST_ID')
+
+{% endif %}
+
 
 # admins of site
 ADMINS = (

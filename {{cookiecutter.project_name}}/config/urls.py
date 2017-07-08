@@ -25,6 +25,14 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
-# allows for serving files during development stage.  should not be used
+# allows for serving files and using django toolbar during development stage.  should not be used
 # in production
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    import debug_toolbar
+    
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
+    # static files 
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
