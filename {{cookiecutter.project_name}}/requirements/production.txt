@@ -1,5 +1,7 @@
 -r base.txt
 
+gunicorn==19.7.1
+
 # Email setup
 django-anymail==0.9
 
@@ -11,4 +13,12 @@ django-memcache-status==1.3
 {% endif %}
 
 # static files
-whitenoise
+whitenoise==3.3.0
+
+# media
+django-storages==1.6.5
+boto3==1.6.11
+
+# logging
+raven==6.6.0
+

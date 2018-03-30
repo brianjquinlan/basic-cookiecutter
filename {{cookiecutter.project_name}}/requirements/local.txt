@@ -3,3 +3,4 @@
 Sphinx==1.5.5
 django-debug-toolbar==1.7
 django-extensions==1.7.9
+coverage==4.5.1
